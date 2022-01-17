@@ -33,7 +33,7 @@ class PoscarDivideElements():
         '''
         pos_list=[]
         for i in range(self.direct_line+1,self.direct_line+1+self.elements_num_sum):
-            pos_list.append(self.pos[i].split())
+            pos_list.append(self.pos[i].split()[0:3])
         pos_array=np.array(pos_list,dtype='float')
         return pos_array
 

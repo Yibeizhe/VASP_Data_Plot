@@ -59,8 +59,8 @@ class Chgcar():
         print(average_plain_density)
         return average_plain_density
 time_b=time.process_time()
-chg=Chgcar('../CHGCAR')
-np.savetxt('aver_pl_Charge_density.dat',chg.aver_len())
+chg=Chgcar('CHGCAR')
+np.savetxt('chg11.dat',chg.aver_len())
 time_e=time.process_time()-time_b
 print('total time {} second'.format(time_e))
 # plt.figure(figsize=(4,3),dpi=300)

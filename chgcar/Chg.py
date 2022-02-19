@@ -28,11 +28,8 @@ class Chgcar():
         self.axis_c = np.array(self.chgcar[4].split(), dtype=float)
 
     def chg_total(self):
-        chg_den=[]
-        for i in range(self.fft_line + 1, self.fft_line+self.charge_lines+1):
-            chg_den+=self.chgcar[i].strip('\n').split()
-            #print(chg_den)
-        chg_density =np.array(chg_den,dtype=float).reshape(self.fft)
+        chg_density=self.chgcar[self.fft_line + 1, self.fft_line+self.charge_lines+1]
+        print(chg_density)
         return chg_density
 
     def lattice_colume(self):

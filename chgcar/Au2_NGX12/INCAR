@@ -1,0 +1,18 @@
+System=Au
+ISTART=0
+PREC=accurate
+ENCUT=400
+#Static Calculation
+ISMEAR =  0            (gaussian smearing method)
+SIGMA  =  0.05         (please check the width of the smearing)
+LORBIT =  11           (PAW radii for projected DOS)
+NEDOS  =  2001         (DOSCAR points)
+NELM   =  200           (Max electronic SCF steps)
+EDIFF  =  1E-05        (SCF energy convergence, in eV)
+
+NGX=5
+NGY=5
+NGZ=5
+
+LCHARG = .TRUE.        (Write CHGCAR or not)
+LWAVE=.F

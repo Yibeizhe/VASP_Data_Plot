@@ -110,64 +110,31 @@ class Dosplot():
 
 
 if __name__=="__main__":
-    def dirs(direc):
-        """
-        This function will used to get all the directories which including
-        "CuIn" string in its name under "direc" directory.
-        """
-        dirs = os.listdir(direc)
-        pdos_dir = []
-        for i in dirs:
-            # Judge if the file is a directory and its name including "CuIn"
-            if os.path.isdir(i) and 'CuIn' in i:
-                pdos_dir.append(i)
-        return pdos_dir
-
-    def pdos_element():
-        """
-        Get all the "*.dat" files in "dir" directory
-        """
-        files = os.listdir()
-        pdos = []
-        pdos_eles=[]
-        for f in files:
-            if ".dat" in f:
-                pdos.append(f)
-                # Get the element name from file's name i.e
-                # e.g get "C" from "PDOS_C.dat"
-                # pdos_eles.append(f.split('_')[1].split('.')[0])
-        return pdos
-
-    def CuInPS(dir):
-        curr_dir = os.getcwd()
-        os.chdir(dir)
-        pdos_elements=pdos_element()
-        for i in range(len(pdos_elements)):
-            PDOS = Dosplot(pdos_elements[i])
-            ele = pdos_elements[i].split('_')[1].split('.')[0]
-            PDOS.tot_plot(label=ele, color=PDOS.colors[i])
-        os.chdir(curr_dir)
-
-    CuInPS_dos=dirs('.')
-    for d in CuInPS_dos:
-        print(d)
-        # Pictures setting
-        fig = plt.figure(figsize=(3, 4), dpi=300)
-        print(os.getcwd())
-        CuInPS(d)
-        ax = plt.gca()
-        # y_major=MultipleLocator(1.2)
-        # x_major=MultipleLocator(1)
-        # ax.yaxis.set_major_locator(y_major)
-        # ax.xaxis.set_major_locator(x_major)
-        plt.xlabel('Energy(eV)', fontsize=10)
-        # plt.ylabel('DOS',fontsize=20)
-        plt.axhline(y=0, linestyle='--', color='grey', linewidth=0.7)
-        plt.axvline(x=0, linestyle='--', color='red', linewidth=1)
-        plt.legend(loc='upper right', fontsize=5)
-        plt.title(d, fontsize=10)
-        plt.tick_params(direction='in', labelsize=5)
-        # plt.xlim(-2, 2)
-        # plt.ylim(0, 10)
-        plt.savefig(d, figsize=(3, 4), dpi=300, bbox_inches='tight')
-        plt.show()
+    Ag=Dosplot('PDOS_Ag.dat')
+    S = Dosplot('PDOS_S.dat')
+    Cu=Dosplot('PDOS_Cu.dat')
+    In=Dosplot('PDOS_In.dat')
+    P = Dosplot('PDOS_P.dat')
+    fig = plt.figure(figsize=(3, 4), dpi=300)
+    plt.plot(Ag.energy,Ag.dos_frame['tot'],linewidth=0.5,label='$Ag-dz^2$')
+    plt.plot(S.energy,S.dos_frame['tot'], linewidth=0.5, label='$S$')
+    plt.plot(Cu.energy, Cu.dos_frame['tot'], linewidth=0.5, label='$Cu$')
+    # plt.plot(In.energy, In.dos_frame['tot'], linewidth=0.5, label='$In$')
+    # plt.plot(P.energy, P.dos_frame['tot'], linewidth=0.5, label='$P$')
+    print(os.getcwd())
+    ax = plt.gca()
+    # y_major=MultipleLocator(1.2)
+    # x_major=MultipleLocator(1)
+    # ax.yaxis.set_major_locator(y_major)
+    # ax.xaxis.set_major_locator(x_major)
+    plt.xlabel('Energy(eV)', fontsize=10)
+    # plt.ylabel('DOS',fontsize=20)
+    plt.axhline(y=0, linestyle='--', color='grey', linewidth=0.7)
+    plt.axvline(x=0, linestyle='--', color='red', linewidth=1)
+    plt.legend(loc='upper right', fontsize=5)
+    plt.title('Ag_FE2', fontsize=10)
+    plt.tick_params(direction='in', labelsize=5)
+    # plt.xlim(-2, 2)
+    # plt.ylim(0, 10)
+    plt.savefig('Ag', figsize=(3, 4), dpi=300, bbox_inches='tight')
+    plt.show()

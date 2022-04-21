@@ -8,7 +8,7 @@ def Potential_plot(potential_file,fermi_level):
     color1 = '#39A1FF'
     color2 = '#FF7F50'
     fig = plt.figure(figsize=(4, 3), dpi=300)
-    plt.plot(potential[:, 0], potential[:, 1], color=color1, lw=2)
+    plt.plot(potential[:, 0], potential[:, 1], color='black', lw=0.5)
     plt.axhline(y=fermi_level, linestyle='--', color='red', linewidth=1.5)
     plt.tick_params(axis='both', direction='in', labelsize=8)
     plt.xlabel("Position along z-axis(Å)")
@@ -34,7 +34,9 @@ if __name__=="__main__":
         'CuInP2S6_Huang-UP_PLANAR_AVERAGE.dat':-1.7403}
     Ag_Gr={'CuInP2S6_Ag_Gr_Down_PLANAR_AVERAGE.dat':-0.2567,
            'CuInP2S6_Ag_Gr_Up_PLANAR_AVERAGE.dat':-0.0717}
-    for key,value in Ag_Gr.items():
+    Ag_FE12={'CuInP2S6-Ag-FE1_PLANAR_AVERAGE.dat':1.3520,
+             'CuInP2S6-Ag-FE2_PLANAR_AVERAGE.dat':1.4374}
+    for key,value in Ag_FE12.items():
         print(key,value)
         Potential_plot(key,value)
 

@@ -4,6 +4,7 @@ import os
 import re
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
+from shutil import copyfile
 # Set times New Times Roman
 rcParams['font.family']='serif'
 rcParams['font.serif']=['Times New Roman']
@@ -39,7 +40,7 @@ class Phono():
     def high_sym_k_name(self):
         print('You need set the high symmetry points name mannually!')
         print('Here I set my defaul value. Change the following line by yourself')
-        ksym_name = [r'$\Gamma$', 'X', 'M','Y', r'$\Gamma$']
+        ksym_name = [r'$\Gamma$', 'M','K', r'$\Gamma$']
         return ksym_name
 
 
@@ -66,8 +67,9 @@ class Phono():
 
         #Plot each phonon band
         for i in range(n_bands):
+            #color='lightseagreen'
             plt.plot(self.k_value, self.phon[i * self.band_kpoints:(i + 1) * self.band_kpoints, 1],
-                     linewidth=1.5,color='lightseagreen')
+                     linewidth=1.5,color='#1D37A3')
 
         # Mark the high symmetry k name
         plt.xticks(self.high_sym_k_value(), self.high_sym_k_name(),fontsize=15)
@@ -82,17 +84,18 @@ class Phono():
         plt.axhline(y=0, linestyle='--', color='red', linewidth=0.5)
         plt.tick_params(direction='in')
         plt.ylabel('Frequency(THz)',fontsize='15')
+        # plt.title(self.pic_name,fontsize='12')
         plt.tight_layout()
         # plt.spines.set_linewidth(5)
         fig.savefig(self.pic_name+'.png')
-        plt.show()
+        # plt.show()
 
 def file_list():
     # List all the file in current directory
     files=[]
     file_name = os.listdir(os.getcwd())
     for i in file_name:
-        if re.match('Phon.*.dat',i):
+        if re.match('[th].*.dat',i):
             files.append(i)
     return files
 
@@ -100,4 +103,8 @@ if __name__ == '__main__':
     files=file_list()
     for i in files:
         print(i)
-        Phono(i).phon_plot()
+        j=i.replace("_phon","").replace("_","-")
+        j=re.sub('-[345]d','',j)
+        copyfile(i,j)
+        print(j)
+        Phono(j).phon_plot()

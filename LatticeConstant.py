@@ -6,7 +6,7 @@ Xene={'Graphene':2.469}
 MoX2={'MoS2':3.190}
 # Metal(111) lattice
 for k in metal:
-    print(k+'(111)','=',metal[k]*2**0.5*0.5*2)
+    print(k+'(111)','=',metal[k]*2**0.5*0.5)
 # print(2.469*2**0.5*2)
 # for j in range(10):
 #     print(j,Xene['Graphene']*j**0.5)

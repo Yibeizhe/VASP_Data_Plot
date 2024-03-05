@@ -34,7 +34,7 @@ class Band():
             plt.plot(kpoints, energy, linewidth=linewidth, linestyle="-", color=color)
 
 
-    def band_up_down(self,linewidth=1.5,color1='black',color2='red'):
+    def band_up_down(self,linewidth=1.5,color1='#1D37A3',color2='#FDB4B6'):
         #plot spin-up
         plt.plot(self.kps,self.bands[0:self.nks,1],linewidth=linewidth, linestyle="-",color=color1,label='UP')
         for i in range(1,self.nbands):
@@ -82,8 +82,9 @@ def k_name_coor(kname='KLABELS',kcoor='KLINES.dat'):
     kps = np.loadtxt(kname, dtype='str', skiprows=1, comments="*")
     # The first column is the K high-symmetry points' names.
     k_name = list(kps[:, 0])
-    k_name[0]=r'$\Gamma$'
-    k_name[-1]=r'$\Gamma$'
+    # k_name[0]=r'$\Gamma$'
+    # k_name[-1]=r'$\Gamma$'
+    k_name = [r'$\Gamma$' if i == 'GAMMA' else i for i in k_name]
     # The K high-symmetry points' coordinates must be read from the KLINES.dat.
     kl = np.loadtxt(kcoor)
     k_coor = np.floor(np.array(sorted(set(kl[:, 0])), dtype=float) * 1000) / 1000

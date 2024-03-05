@@ -9,7 +9,7 @@ class Eigenval():
             self.electron = self.eigen[5].split()[0]
             print('There are {} electrons'.format(self.electron))
 
-            # The 2nd number in 6th line of EIGNVAL file is the number of bands
+            # The 2nd number in 6th line of EIGNVAL file is k points
             self.ks=int(self.eigen[5].split()[1])
             print('There are {} k points'.format(self.ks))
 
